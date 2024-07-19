@@ -1,7 +1,7 @@
 import type { Config } from 'tailwindcss'
 
 export default {
-	content: ['./src/**/*.{html,js}'],
+	content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
 	theme: {
 		colors: {
 			black: '#020203',
@@ -9,16 +9,17 @@ export default {
 			blue: '#4AB8FF',
 			yellow: '#FDCC0C',
 			pink: '#FD5181',
+			white: '#FFF',
 		},
 		fontFamily: {
 			sans: ['Roboto', 'sans-serif'],
 		},
 		fontSize: {
-			xs: ['12px', { lineHeight: '24px' }],
-			s: ['14px', { lineHeight: '24px' }],
-			base: ['20px', { lineHeight: '24px' }],
-			lg: ['24px', { lineHeight: '24px' }],
-			xl: ['48px', { lineHeight: '48px' }],
+			xs: '12px',
+			s: '14px',
+			base: '20px',
+			lg: '24px',
+			xl: '48px',
 		},
 		fontWeight: {
 			normal: '400',
@@ -35,7 +36,7 @@ export default {
 				xxl: '80px',
 			},
 			borderRadius: {
-				DEFAULT: '6px',
+				sm: '6px',
 			},
 		},
 	},
