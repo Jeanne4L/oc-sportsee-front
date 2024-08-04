@@ -1,10 +1,8 @@
-import React from 'react'
-
 import Logo from '../icon/logo'
 
 const Header = () => {
 	return (
-		<header className='bg-black p-s pr-xxl flex gap-xxl justify-between items-center fixed top-0 w-full'>
+		<header className='bg-black p-s pr-xxl flex gap-xxl justify-between items-center fixed top-0 w-full shadow-header'>
 			<Logo />
 			<ul className='flex-1 flex justify-between ml-xxl'>
 				<li>

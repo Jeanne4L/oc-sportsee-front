@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { IconType } from './types'
 
 const Cycling = ({ width = '38px', height = '32px', style }: IconType) => {

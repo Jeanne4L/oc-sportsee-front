@@ -34,9 +34,18 @@ export default {
 				l: '32px',
 				xl: '40px',
 				xxl: '80px',
+				'header-height': '93px',
+				'sidebar-width': '88px',
 			},
 			borderRadius: {
 				sm: '6px',
+			},
+			boxShadow: {
+				header: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+			},
+			translate: {
+				'1/2': '-18%',
+				'-full': '-250%',
 			},
 		},
 	},

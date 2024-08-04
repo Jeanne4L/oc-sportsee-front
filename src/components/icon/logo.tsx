@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { IconType } from './types'
 
 const Logo = ({ width = '178px', height = '61px', style }: IconType) => {

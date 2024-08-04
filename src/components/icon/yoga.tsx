@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { IconType } from './types'
 
 const Yoga = ({ width = '36px', height = '32px', style }: IconType) => {

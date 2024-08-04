@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { IconType } from './types'
 
 const Swimming = ({ width = '32px', height = '32px', style }: IconType) => {

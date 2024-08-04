@@ -1,13 +1,11 @@
-import React from 'react'
-
 import Icons from '../icon'
 
 const { Bodybuilding, Cycling, Swimming, Yoga } = Icons
 
 const LeftMenu = () => {
 	return (
-		<div className='left-menu bg-black w-fit flex flex-col justify-center fixed bottom-0 p-m pt-0'>
-			<div className='left-menu__options flex flex-col gap-s'>
+		<div className='bg-black w-fit flex flex-col justify-center fixed bottom-0 p-m pt-0 top-header-height'>
+			<div className='flex flex-col gap-s -translate-y-1/4'>
 				<div className='bg-white rounded-sm inline-flex w-10 h-10 flex justify-center items-center'>
 					<Yoga />
 				</div>
@@ -21,7 +19,7 @@ const LeftMenu = () => {
 					<Bodybuilding />
 				</div>
 			</div>
-			<p className='copyright text-white text-xs absolute bottom-m left-0'>
+			<p className='text-white text-xs absolute bottom-m left-0 -rotate-90 translate-x-1/2 -translate-y-full whitespace-nowrap'>
 				Copyright, SportSee 2020
 			</p>
 		</div>
