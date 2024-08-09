@@ -9,6 +9,12 @@ export default {
 			yellow: '#FDCC0C',
 			pink: '#FD5181',
 			white: '#FFF',
+			lightGray: '#FBFBFB',
+			gray: '#74798C',
+			redBg: 'rgba(255, 1, 1, 0.1)',
+			blueBg: 'rgba(74, 184, 255, 0.1)',
+			yellowBg: 'rgba(253, 204, 12, 0.1)',
+			pinkBg: 'rgba(253, 81, 129, 0.1)',
 		},
 		fontFamily: {
 			sans: ['Roboto', 'sans-serif'],
@@ -35,6 +41,7 @@ export default {
 				xxl: '80px',
 				'header-height': '93px',
 				'sidebar-width': '88px',
+				'stat-card': '230px',
 			},
 			borderRadius: {
 				sm: '6px',
@@ -48,5 +55,6 @@ export default {
 			},
 		},
 	},
+	safelist: ['bg-redBg', 'bg-blueBg', 'bg-yellowBg', 'bg-pinkBg'],
 	plugins: [],
-} 
+}
