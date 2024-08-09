@@ -23,10 +23,6 @@ export const useQuery = <T>(query: string) => {
 	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
-		if (data) {
-			return
-		}
-
 		axiosInstance
 			.get<ApiResponse<T>>(query)
 			.then((response) => {
@@ -34,7 +30,7 @@ export const useQuery = <T>(query: string) => {
 			})
 			.catch(setError)
 			.finally(() => setLoading(false))
-	}, [])
+	}, [query])
 
 	return {
 		data,
