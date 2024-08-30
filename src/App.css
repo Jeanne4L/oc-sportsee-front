@@ -1,4 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	box-sizing: border-box;
+}
+
 #root {
 	margin: 0;
 	padding: 0;
+}
+
+.recharts-wrapper {
+	display: flex;
+	flex-direction: column-reverse;
 }

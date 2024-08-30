@@ -45,6 +45,8 @@ export default {
 				'sidebar-width': '72px',
 				'header-height': '93px',
 				'stat-card': '198px',
+				'chart-height': '200px',
+				'chart-desktop-height': '300px',
 				'error-img-height': '500px',
 			},
 			borderRadius: {

@@ -4,11 +4,12 @@ import {
 	XAxis,
 	Tooltip,
 	ResponsiveContainer,
-	TooltipProps,
 	Legend,
 } from 'recharts'
 
 import { SessionsDurationType } from '../../../types/charts'
+import CustomLegend from './CustomLegend'
+import CustomTooltip from './CustomTooltip'
 
 type SessionsLineChartType = {
 	data: SessionsDurationType[]
@@ -16,39 +17,14 @@ type SessionsLineChartType = {
 
 const weekDays = ['L', 'M', 'M', 'J', 'V', 'S', 'D']
 
-const CustomTooltip: React.FC<TooltipProps<number, string>> = ({
-	active,
-	payload,
-}) => {
-	if (active && payload && payload.length) {
-		return (
-			<div className='text-center px-s py-xs bg-white'>
-				<span className='text-black text-xs font-medium'>{`${payload[0].value} min`}</span>
-			</div>
-		)
-	}
-
-	return null
-}
-
-const CustomLegend = () => {
-	return (
-		<span
-			className='font-medium text-s'
-			style={{ color: 'rgba(255,255,255,0.5)' }}
-		>
-			Durée moyenne des <br />
-			sessions
-		</span>
-	)
-}
-
 const SessionsLineChart = ({ data }: SessionsLineChartType) => {
 	return (
-		<ResponsiveContainer width='33%' height={200} className='bg-red rounded-sm'>
+		<ResponsiveContainer
+			width='33%'
+			className='bg-red rounded-sm !h-chart-height xl:!h-chart-desktop-height'
+		>
 			<LineChart
 				width={500}
-				height={200}
 				data={data}
 				margin={{
 					top: 16,
@@ -56,6 +32,7 @@ const SessionsLineChart = ({ data }: SessionsLineChartType) => {
 					left: 24,
 					bottom: 16,
 				}}
+				className='h-chart-height xl:!h-chart-desktop-height'
 			>
 				<Legend verticalAlign='top' align='left' content={CustomLegend} />
 				<XAxis

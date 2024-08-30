@@ -7,35 +7,24 @@ import {
 } from 'recharts'
 
 import { PerformanceRadarChartType } from '../../../types/charts'
+import useWindowSize from '../../../helpers/useWindowSize'
+import translateKinds from './helpers/translateKinds'
 
 const PerformanceRadarChart = ({
 	data,
 	kind: kindArray,
 }: PerformanceRadarChartType) => {
-	const kindTranslations: { [key: string]: string } = {
-		cardio: 'Cardio',
-		energy: 'Énergie',
-		endurance: 'Endurance',
-		strength: 'Force',
-		speed: 'Vitesse',
-		intensity: 'Intensité',
-	}
+	const kindArrayFr = translateKinds({ kindArray })
 
-	const kindArrayFr = Object.keys(kindArray).reduce(
-		(acc: { [key: string]: string }, key) => {
-			acc[key] = kindTranslations[kindArray[key]]
-			return acc
-		},
-		{}
-	)
+	const [width] = useWindowSize()
+	const outerRadius = width >= 1280 ? 80 : 50
 
 	return (
 		<ResponsiveContainer
 			width='33%'
-			height={200}
-			className='bg-greyChartBg rounded-sm'
+			className='bg-greyChartBg rounded-sm !h-chart-height xl:!h-chart-desktop-height'
 		>
-			<RadarChart outerRadius={50} cx='50%' cy='50%' data={data}>
+			<RadarChart outerRadius={outerRadius} cx='50%' cy='50%' data={data}>
 				<PolarGrid radialLines={false} stroke='#fff' />
 				<PolarAngleAxis
 					dataKey='kind'

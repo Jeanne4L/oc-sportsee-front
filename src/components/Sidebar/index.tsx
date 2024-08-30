@@ -2,7 +2,7 @@ import Icons from '../icon'
 
 const { Bodybuilding, Cycling, Swimming, Yoga } = Icons
 
-const LeftMenu = () => {
+const Sidebar = () => {
 	return (
 		<div className='bg-black w-fit flex flex-col justify-center fixed bottom-0 p-s pt-0 top-header-height'>
 			<div className='flex flex-col gap-s -translate-y-1/4'>
@@ -26,4 +26,4 @@ const LeftMenu = () => {
 	)
 }
 
-export default LeftMenu
+export default Sidebar

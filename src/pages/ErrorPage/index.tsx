@@ -1,5 +1,5 @@
 import Button from '../../components/Button'
-import errorImage from '../../../public/error-image.png'
+import errorImage from '/error-image.png?url'
 
 type ErrorType = {
 	message: string
