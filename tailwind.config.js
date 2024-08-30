@@ -9,6 +9,13 @@ export default {
 			yellow: '#FDCC0C',
 			pink: '#FD5181',
 			white: '#FFF',
+			lightGrey: '#FBFBFB',
+			grey: '#74798C',
+			redBg: 'rgba(255, 1, 1, 0.1)',
+			blueBg: 'rgba(74, 184, 255, 0.1)',
+			yellowBg: 'rgba(253, 204, 12, 0.1)',
+			pinkBg: 'rgba(253, 81, 129, 0.1)',
+			greyChartBg: '#282D30',
 		},
 		fontFamily: {
 			sans: ['Roboto', 'sans-serif'],
@@ -34,7 +41,8 @@ export default {
 				xl: '40px',
 				xxl: '80px',
 				'header-height': '93px',
-				'sidebar-width': '88px',
+				'sidebar-width': '72px',
+				'stat-card': '198px',
 			},
 			borderRadius: {
 				sm: '6px',
@@ -43,10 +51,11 @@ export default {
 				header: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
 			},
 			translate: {
-				'1/2': '-18%',
+				'1/2': '-24%',
 				'-full': '-250%',
 			},
 		},
 	},
+	safelist: ['bg-redBg', 'bg-blueBg', 'bg-yellowBg', 'bg-pinkBg'],
 	plugins: [],
-} 
+}
