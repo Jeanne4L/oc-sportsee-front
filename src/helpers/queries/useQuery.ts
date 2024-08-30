@@ -1,5 +1,6 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { useState, useEffect } from 'react'
+import generateError from '../generateError'
 
 const BASE_URL = 'http://localhost:3000'
 
@@ -13,13 +14,13 @@ type ApiResponse<T> = {
 
 export type QueryResult<T> = {
 	data: T | undefined
-	error: Error | null | undefined
+	error: AxiosError | null | undefined
 	loading: boolean
 }
 
 export const useQuery = <T>(query: string) => {
 	const [data, setData] = useState<T>()
-	const [error, setError] = useState<Error | null>()
+	const [error, setError] = useState<AxiosError | null>()
 	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
@@ -28,7 +29,9 @@ export const useQuery = <T>(query: string) => {
 			.then((response) => {
 				setData(response.data.data)
 			})
-			.catch(setError)
+			.catch((error) => {
+				setError(generateError(error))
+			})
 			.finally(() => setLoading(false))
 	}, [query])
 
