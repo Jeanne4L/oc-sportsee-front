@@ -26,11 +26,13 @@ export default {
 			base: '20px',
 			lg: '24px',
 			xl: '48px',
+			xxl: '112px',
 		},
 		fontWeight: {
 			normal: '400',
 			medium: '500',
 			bold: '700',
+			black: '900',
 		},
 		extend: {
 			spacing: {
@@ -40,9 +42,10 @@ export default {
 				l: '32px',
 				xl: '40px',
 				xxl: '80px',
-				'header-height': '93px',
 				'sidebar-width': '72px',
+				'header-height': '93px',
 				'stat-card': '198px',
+				'error-img-height': '500px',
 			},
 			borderRadius: {
 				sm: '6px',
@@ -53,6 +56,9 @@ export default {
 			translate: {
 				'1/2': '-24%',
 				'-full': '-250%',
+			},
+			lineHeight: {
+				'error-code': '.8',
 			},
 		},
 	},

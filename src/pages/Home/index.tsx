@@ -18,6 +18,8 @@ import SessionsLineChart from '../../components/chart/SessionsLineChart'
 import PerformanceRadarChart from '../../components/chart/PerformanceRadarChart'
 import ScoreRadialChart from '../../components/chart/ScoreRadialChart'
 import Loader from '../../components/Loader'
+import Loading from '../Loading'
+import ErrorPage from '../ErrorPage'
 
 const HomeContent: FC = () => {
 	const authContext = useContext(AuthContext)
@@ -52,6 +54,14 @@ const HomeContent: FC = () => {
 	const loading =
 		userLoading || dailyLoading || sessionsLoading || performanceLoading
 	const error = userError || dailyError || sessionsError || performanceError
+
+	if (loading) {
+		return <Loading />
+	}
+
+	if (error) {
+		return <ErrorPage message={error.message} code={error.response?.status} />
+	}
 
 	const stats = userData?.keyData
 	const dailyScore = [{ score: (userData && userData.score * 100) ?? 0 }]
@@ -102,14 +112,6 @@ const HomeContent: FC = () => {
 		statsArray.push({ value, unit, label, icon, color })
 	})
 
-	if (loading) {
-		return <Loader />
-	}
-
-	if (error) {
-		return <p>{error?.message ?? 'No userData have been found'}</p>
-	}
-
 	return (
 		<>
 			<Header />
@@ -120,7 +122,7 @@ const HomeContent: FC = () => {
 						Bonjour{' '}
 						<span className='text-red'>{userData.userInfos.firstName}</span>
 					</h1>
-					<p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
+					<p>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
 					<Suspense fallback={<Loader />}>
 						<div className='flex gap-m my-xl'>
 							<div className='flex flex-col flex-1 gap-l'>
