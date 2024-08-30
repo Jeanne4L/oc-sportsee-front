@@ -4,7 +4,7 @@ type UserInfos = {
 	age: number
 }
 
-type KeyData = {
+export type KeyData = {
 	calorieCount: number
 	proteinCount: number
 	carbohydrateCount: number

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { createContext } from 'react'
 
-import './style.css'
+import './App.css'
 import Home from './pages/Home'
 
 type AuthContextType = {

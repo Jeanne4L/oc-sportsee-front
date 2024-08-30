@@ -7,51 +7,25 @@ import {
 	Tooltip,
 	Legend,
 	ResponsiveContainer,
-	TooltipProps,
 } from 'recharts'
 
 import { DailyActivitiesType } from '../../../types/charts'
+import CustomLegend from './CustomLegend'
+import CustomTooltip from './CustomTooltip'
 
 type DailyBarChartType = {
 	data: DailyActivitiesType[]
 }
 
-const CustomTooltip: React.FC<TooltipProps<number, string>> = ({
-	active,
-	payload,
-}) => {
-	if (active && payload && payload.length) {
-		return (
-			<div className='flex flex-col gap-s text-center p-s'>
-				<span className='text-white text-xs'>{`${payload[0].value}kg`}</span>
-				<span className='text-white text-xs'>{`${payload[1].value}Kcal`}</span>
-			</div>
-		)
-	}
-
-	return null
-}
-
-const CustomLegend = (value: string) => {
-	const legendValue =
-		value == 'kilogram' ? 'Poids (kg)' : 'Calories brûlées (kCal)'
-
-	return <span className='text-grey text-s'>{legendValue}</span>
-}
-
 const DailyBarChart = ({ data }: DailyBarChartType) => {
 	return (
-		<ResponsiveContainer
-			width={'100%'}
-			height={200}
-			className='bg-lightGrey rounded-sm pt-m'
-		>
+		<ResponsiveContainer className='bg-lightGrey rounded-sm pt-m !h-chart-height xl:!h-chart-desktop-height'>
 			<BarChart
 				data={data}
 				margin={{
 					top: 32,
-					right: -8,
-					left: 16,
+					right: 0,
+					left: 0,
 					bottom: 5,
 				}}
 				barGap={8}

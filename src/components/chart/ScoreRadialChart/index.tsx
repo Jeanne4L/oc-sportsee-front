@@ -4,16 +4,14 @@ import {
 	ResponsiveContainer,
 	Legend,
 } from 'recharts'
+import useWindowSize from '../../../helpers/useWindowSize'
+import CustomLabel from './CustomLabel'
+import CustomLegend from './CustomLegend'
 
 type ScoreRadialChartType = {
 	data: {
 		score: number
 	}[]
-}
-
-type CustomizedLabelProps = {
-	cx: number
-	cy: number
 }
 
 const ScoreRadialChart = ({ data }: ScoreRadialChartType) => {
@@ -26,77 +24,14 @@ const ScoreRadialChart = ({ data }: ScoreRadialChartType) => {
 		},
 	]
 
-	const renderCustomizedLabel = ({ cx, cy }: CustomizedLabelProps) => {
-		const x = cx
-		const y = cy
-
-		return (
-			<>
-				<rect
-					x={x - 50}
-					y={y - 50}
-					width={100}
-					height={100}
-					fill='#fff'
-					rx={1000}
-				/>
-				<text
-					x={x}
-					y={y}
-					fill='#282D30'
-					textAnchor='middle'
-					dominantBaseline='central'
-					style={{
-						display: 'flex',
-						flexDirection: 'column',
-					}}
-				>
-					<tspan
-						x={x}
-						y={y}
-						dy='-26'
-						style={{ fontSize: '24px', fontWeight: 700 }}
-					>
-						{newUserData.score}%
-					</tspan>
-					<tspan
-						x={x}
-						y={y}
-						dy='0'
-						style={{
-							fontSize: '14px',
-							fill: '#74798C',
-							fontWeight: 500,
-						}}
-					>
-						de votre
-					</tspan>
-					<tspan
-						x={x}
-						y={y}
-						dy='22'
-						style={{
-							fontSize: '14px',
-							fill: '#74798C',
-							fontWeight: 500,
-						}}
-					>
-						objectif
-					</tspan>
-				</text>
-			</>
-		)
-	}
-
-	const CustomLegend = () => {
-		return <span className='text-greyChartBg font-medium text-s'>Score</span>
-	}
+	const [width] = useWindowSize()
+	const labelDimensions = width >= 1280 ? 160 : 100
+	const labelGap = width >= 1280 ? 80 : 50
 
 	return (
 		<ResponsiveContainer
 			width='33%'
-			height={200}
-			className='bg-lightGrey rounded-sm'
+			className='bg-lightGrey rounded-sm !h-chart-height xl:!h-chart-desktop-height'
 		>
 			<RadialBarChart
 				cx='50%'
@@ -111,7 +46,14 @@ const ScoreRadialChart = ({ data }: ScoreRadialChartType) => {
 				<RadialBar
 					fill='#FF0101'
 					dataKey='score'
-					label={renderCustomizedLabel}
+					label={(props) => (
+						<CustomLabel
+							{...props}
+							score={newUserData.score}
+							labelGap={labelGap}
+							labelDimensions={labelDimensions}
+						/>
+					)}
 					cornerRadius={50}
 				/>
 			</RadialBarChart>
