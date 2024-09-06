@@ -9,72 +9,90 @@ import {
 	ResponsiveContainer,
 } from 'recharts'
 
-import { DailyActivitiesType } from '../../../types/charts'
+import { DailyActivitiesProps } from '../../../types/charts'
 import CustomLegend from './CustomLegend'
 import CustomTooltip from './CustomTooltip'
+import getDayInDate from './helpers/getDayInDate'
 
-type DailyBarChartType = {
-	data: DailyActivitiesType[]
+type DailyBarChartProps = {
+	data: DailyActivitiesProps[]
 }
 
-const DailyBarChart = ({ data }: DailyBarChartType) => {
-	return (
-		<ResponsiveContainer className='bg-lightGrey rounded-sm pt-m !h-chart-height xl:!h-chart-desktop-height'>
-			<BarChart
-				data={data}
-				margin={{
-					top: 32,
-					right: 0,
-					left: 0,
-					bottom: 5,
-				}}
-				barGap={8}
-				barSize={8}
-			>
-				<Legend
-					wrapperStyle={{ position: 'static' }}
-					iconType='circle'
-					iconSize={8}
-					className='-mt-l pr-l'
-					formatter={CustomLegend}
-					align='right'
-				/>
-				<CartesianGrid vertical={false} strokeDasharray='3' />
-				<XAxis
-					axisLine={false}
-					tickLine={false}
-					tickFormatter={(tick) => tick + 1}
-					tickMargin={16}
-					stroke='#9B9EAC'
-				/>
-				<YAxis yAxisId='left' orientation='left' stroke='#9B9EAC' hide={true} />
-				<YAxis
-					yAxisId='right'
-					orientation='right'
-					stroke='#9B9EAC'
-					axisLine={false}
-					tickLine={false}
-				/>
-				<Tooltip
-					wrapperStyle={{ background: '#E60000' }}
-					labelStyle={{ display: 'none' }}
-					content={<CustomTooltip />}
-				/>
+const DailyBarChart = ({ data }: DailyBarChartProps) => {
+	const formattedData = data.map((d) => ({
+		...d,
+		day: getDayInDate(d.day),
+	}))
 
-				<Bar
-					yAxisId='left'
-					dataKey='kilogram'
-					fill='#282D30'
-					radius={[8, 8, 0, 0]}
-				/>
-				<Bar
-					yAxisId='right'
-					dataKey='calories'
-					fill='#E60000'
-					radius={[8, 8, 0, 0]}
-				/>
-			</BarChart>
-		</ResponsiveContainer>
+	return (
+		<div className='bg-lightGrey rounded-sm pt-sidebar-width pb-m pl-m !h-chart-desktop-height relative'>
+			<span className='text-greyChartBg font-medium text-s xl:text-base absolute top-xl left-m'>
+				Activité quotidienne
+			</span>
+			<ResponsiveContainer>
+				<BarChart
+					data={formattedData}
+					margin={{
+						top: 0,
+						right: 0,
+						left: 0,
+						bottom: 5,
+					}}
+					barGap={8}
+					barSize={8}
+				>
+					<Legend
+						wrapperStyle={{ top: '-34px', right: '16px' }}
+						iconType='circle'
+						iconSize={8}
+						formatter={CustomLegend}
+						align='right'
+						verticalAlign='top'
+					/>
+					<CartesianGrid vertical={false} strokeDasharray='3' />
+					<XAxis
+						dataKey='day'
+						axisLine={false}
+						tickLine={false}
+						tickMargin={16}
+						stroke='#9B9EAC'
+					/>
+					<YAxis
+						dataKey='calories'
+						yAxisId='left'
+						orientation='left'
+						stroke='#9B9EAC'
+						hide={true}
+					/>
+					<YAxis
+						dataKey='kilogram'
+						yAxisId='right'
+						orientation='right'
+						stroke='#9B9EAC'
+						axisLine={false}
+						tickLine={false}
+					/>
+					<Tooltip
+						wrapperStyle={{ background: '#E60000' }}
+						labelStyle={{ display: 'none' }}
+						content={<CustomTooltip />}
+						offset={16}
+					/>
+					<Bar
+						yAxisId='right'
+						dataKey='kilogram'
+						fill='#282D30'
+						radius={[8, 8, 0, 0]}
+					/>
+					<Bar
+						yAxisId='left'
+						dataKey='calories'
+						fill='#E60000'
+						radius={[8, 8, 0, 0]}
+					/>
+				</BarChart>
+			</ResponsiveContainer>
+		</div>
 	)
 }
 

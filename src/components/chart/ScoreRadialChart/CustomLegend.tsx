@@ -1,8 +1,15 @@
-const CustomLegend = () => {
+type CustomLegendProps = {
+	score: number
+}
+const CustomLegend = ({ score }: CustomLegendProps) => {
 	return (
-		<span className='text-greyChartBg font-medium text-s xl:text-base'>
-			Score
-		</span>
+		<p className='text-m font-medium text-grey text-center'>
+			<span className='text-lg font-bold text-black'>{score}%</span>
+			<br />
+			de votre
+			<br />
+			objectif
+		</p>
 	)
 }
 

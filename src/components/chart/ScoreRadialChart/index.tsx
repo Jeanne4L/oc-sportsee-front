@@ -4,60 +4,50 @@ import {
 	ResponsiveContainer,
 	Legend,
 } from 'recharts'
-import useWindowSize from '../../../helpers/useWindowSize'
-import CustomLabel from './CustomLabel'
+
 import CustomLegend from './CustomLegend'
 
-type ScoreRadialChartType = {
-	data: {
-		score: number
-	}[]
+type ScoreRadialChartProps = {
+	score: number
 }
 
-const ScoreRadialChart = ({ data }: ScoreRadialChartType) => {
-	const newUserData = { ...data[0], fill: '#FF0101' }
-	const newData = [
-		newUserData,
+const ScoreRadialChart = ({ score }: ScoreRadialChartProps) => {
+	const data = [
+		{
+			score,
+			fill: '#FF0101',
+		},
 		{
 			score: 100,
 			fill: 'rgba(0,0,0, 0)',
 		},
 	]
 
-	const [width] = useWindowSize()
-	const labelDimensions = width >= 1280 ? 160 : 100
-	const labelGap = width >= 1280 ? 80 : 50
-
 	return (
-		<ResponsiveContainer
-			width='33%'
-			className='bg-lightGrey rounded-sm !h-chart-height xl:!h-chart-desktop-height'
-		>
-			<RadialBarChart
-				cx='50%'
-				cy='50%'
-				innerRadius='74%'
-				outerRadius='94%'
-				barSize={10}
-				data={newData}
-				margin={{ top: 16, right: 24, bottom: 16, left: 24 }}
-			>
-				<Legend verticalAlign='top' align='left' content={CustomLegend} />
-				<RadialBar
-					fill='#FF0101'
-					dataKey='score'
-					label={(props) => (
-						<CustomLabel
-							{...props}
-							score={newUserData.score}
-							labelGap={labelGap}
-							labelDimensions={labelDimensions}
-						/>
-					)}
-					cornerRadius={50}
-				/>
-			</RadialBarChart>
-		</ResponsiveContainer>
+		<div className='bg-lightGrey rounded-sm !h-chart-height xl:!h-chart-desktop-height w-2/6 relative'>
+			<span className='text-greyChartBg font-medium text-s xl:text-base absolute top-s left-s xl:top-m xl:left-m'>
+				Score
+			</span>
+			<ResponsiveContainer>
+				<RadialBarChart
+					cx='50%'
+					cy='50%'
+					innerRadius={75}
+					outerRadius={95}
+					barSize={10}
+					data={data}
+					margin={{ top: 16, right: 24, bottom: 16, left: 24 }}
+				>
+					<RadialBar fill='#FF0101' dataKey='score' cornerRadius={50} />
+					<circle cx='50%' cy='50%' r='70' fill='white' />
+					<Legend
+						verticalAlign='middle'
+						align='center'
+						content={() => <CustomLegend score={score} />}
+					/>
+				</RadialBarChart>
+			</ResponsiveContainer>
+		</div>
 	)
 }
 
