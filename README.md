@@ -14,7 +14,7 @@ This is the front-end part of the school project, built with React.
 
 To run this project, you need to set up and run the back-end server.
 
-- Clone this repository : `https://github.com/Jeanne4L/oc-sportsee-back`
+- Clone this repository : [oc-sportsee-backend](https://github.com/Jeanne4L/oc-sportsee-back)
 - Install the dependencies and devDependencies, and start the server.
 
 ```sh
@@ -39,4 +39,4 @@ You can switch between users by changing the number in the header
 
 # oc-sportsee-back
 
-- `https://github.com/Jeanne4L/oc-sportsee-back`
+[oc-sportsee-backend](https://github.com/Jeanne4L/oc-sportsee-back)
