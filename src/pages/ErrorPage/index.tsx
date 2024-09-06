@@ -1,7 +1,7 @@
 import Button from '../../components/Button'
 import errorImage from '/error-image.png?url'
 
-type ErrorType = {
+type ErrorProps = {
 	message: string
 	code?: number
 }
@@ -10,7 +10,7 @@ const refreshPage = () => {
 	window.location.reload()
 }
 
-const ErrorPage = ({ message, code }: ErrorType) => {
+const ErrorPage = ({ message, code }: ErrorProps) => {
 	return (
 		<div className='flex justify-center items-center h-screen'>
 			<img

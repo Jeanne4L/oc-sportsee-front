@@ -20,23 +20,23 @@ export type StatsArrayItem = {
 	color: string
 }
 
-export type DailyActivitiesType = {
+export type DailyActivitiesProps = {
 	day: Date
 	kilogram: number
 	calories: number
 }
 
-export type SessionsDurationType = {
+export type SessionsDurationProps = {
 	day: number
 	sessionLength: number
 }
 
-type PerformanceDataType = {
+type PerformanceDataProps = {
 	value: number
 	kind: number
 }
 
-export type PerformanceRadarChartType = {
+export type PerformanceRadarChartProps = {
 	kind: { [key: string]: string }
-	data: PerformanceDataType[]
+	data: PerformanceDataProps[]
 }

@@ -4,12 +4,14 @@ import { createContext } from 'react'
 import './App.css'
 import Home from './pages/Home'
 
-type AuthContextType = {
+type AuthContextProps = {
 	userId: number
 	setUserId: React.Dispatch<React.SetStateAction<number>>
 }
 
-export const AuthContext = createContext<AuthContextType | undefined>(undefined)
+export const AuthContext = createContext<AuthContextProps | undefined>(
+	undefined
+)
 
 const App = () => {
 	const [userId, setUserId] = useState<number>(12)

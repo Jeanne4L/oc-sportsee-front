@@ -1,7 +1,7 @@
-type TranslateKindsType = {
+type TranslateKindsProps = {
 	kindArray: { [key: string]: string }
 }
-const translateKinds = ({ kindArray }: TranslateKindsType) => {
+const translateKinds = ({ kindArray }: TranslateKindsProps) => {
 	const kindTranslations: { [key: string]: string } = {
 		cardio: 'Cardio',
 		energy: 'Énergie',

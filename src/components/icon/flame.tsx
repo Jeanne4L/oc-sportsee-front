@@ -1,6 +1,6 @@
-import { IconType } from './types'
+import { IconProps } from './types'
 
-const Flame = ({ width = '17px', height = '20px', style }: IconType) => {
+const Flame = ({ width = '17px', height = '20px', style }: IconProps) => {
 	return (
 		<svg
 			width={width}

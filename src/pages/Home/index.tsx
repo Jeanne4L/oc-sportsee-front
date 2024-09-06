@@ -2,9 +2,6 @@ import { FC, Suspense, useContext } from 'react'
 
 import { AuthContext } from '../../App'
 import { useUserData } from '../../helpers/queries/user/getUserData'
-import { getDailyActivity } from '../../helpers/queries/chart/getDailyActivity'
-import { getSessionsDuration } from '../../helpers/queries/chart/getSessionsDuration'
-import { getPerformanceStats } from '../../helpers/queries/chart/getPerformanceStats'
 import Header from '../../components/Header'
 import StatCard from '../../components/StatCard'
 import DailyBarChart from '../../components/chart/DailyBarChart'
@@ -16,59 +13,53 @@ import Loading from '../Loading'
 import ErrorPage from '../ErrorPage'
 import { generateStatsArray } from './helpers/generateStatsArray'
 import Sidebar from '../../components/Sidebar'
+import { useDailyActivity } from '../../helpers/queries/chart/useDailyActivity'
+import { useSessionsDuration } from '../../helpers/queries/chart/useSessionsDuration'
+import { usePerformanceStats } from '../../helpers/queries/chart/usePerformanceStats'
 
 const HomeContent: FC = () => {
 	const authContext = useContext(AuthContext)
-
-	if (!authContext) {
-		return <p>Error: AuthContext not found</p>
-	}
-
-	const { userId } = authContext
+	const userId = authContext?.userId
 
 	const {
 		data: userData,
 		loading: userLoading,
 		error: userError,
-	} = useUserData(userId)
+	} = useUserData(userId ?? 0)
 	const {
 		data: dailyData,
 		loading: dailyLoading,
 		error: dailyError,
-	} = getDailyActivity(userId)
+	} = useDailyActivity(userId ?? 0)
 	const {
 		data: sessionsData,
 		loading: sessionsLoading,
 		error: sessionsError,
-	} = getSessionsDuration(userId)
+	} = useSessionsDuration(userId ?? 0)
 	const {
 		data: performanceData,
 		loading: performanceLoading,
 		error: performanceError,
-	} = getPerformanceStats(userId)
+	} = usePerformanceStats(userId ?? 0)
 
 	const loading =
 		userLoading || dailyLoading || sessionsLoading || performanceLoading
 	const error = userError || dailyError || sessionsError || performanceError
 
-	if (loading) {
-		return <Loading />
-	}
-
-	if (error) {
+	if (loading) return <Loading />
+	if (error)
 		return <ErrorPage message={error.message} code={error.response?.status} />
-	}
+	if (!userData)
+		return <ErrorPage message='Aucune donnée disponible' code={404} />
 
-	const stats = userData?.keyData
-	const dailyScore = [{ score: (userData && userData.score * 100) ?? 0 }]
+	const stats = userData.keyData
+	const dailyScore = userData.score * 100 ?? 0
 	const dailyActivities = dailyData?.sessions ?? []
 	const sessionsDurations = sessionsData?.sessions ?? []
 	const performanceDurations = performanceData?.data ?? []
 	const performanceKind = performanceData?.kind || {}
 
-	if (!stats) {
-		return null
-	}
+	if (!stats) return null
 
 	const statsArray = generateStatsArray(stats)
 
@@ -93,7 +84,7 @@ const HomeContent: FC = () => {
 										data={performanceDurations}
 										kind={performanceKind}
 									/>
-									<ScoreRadialChart data={dailyScore} />
+									<ScoreRadialChart score={dailyScore} />
 								</div>
 							</div>
 							<div className='flex flex-col justify-between gap-6'>

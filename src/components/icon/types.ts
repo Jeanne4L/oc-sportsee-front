@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react'
 
-export type IconType = {
+export type IconProps = {
 	width?: string
 	height?: string
 	style?: CSSProperties

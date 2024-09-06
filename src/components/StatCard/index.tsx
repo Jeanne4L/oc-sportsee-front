@@ -1,11 +1,11 @@
-type StatCardType = {
+type StatCardProps = {
 	Icon: JSX.Element
 	data: string
 	label: string
 	color: string
 }
 
-const StatCard = ({ Icon, data, label, color }: StatCardType) => {
+const StatCard = ({ Icon, data, label, color }: StatCardProps) => {
 	return (
 		<div className='w-fit min-w-stat-card flex bg-lightGrey rounded-sm p-s gap-6'>
 			<div

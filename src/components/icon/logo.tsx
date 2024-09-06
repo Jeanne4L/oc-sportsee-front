@@ -1,6 +1,6 @@
-import { IconType } from './types'
+import { IconProps } from './types'
 
-const Logo = ({ width = '178px', height = '61px', style }: IconType) => {
+const Logo = ({ width = '178px', height = '61px', style }: IconProps) => {
 	return (
 		<svg
 			width={width}

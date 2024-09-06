@@ -6,14 +6,14 @@ import {
 	ResponsiveContainer,
 } from 'recharts'
 
-import { PerformanceRadarChartType } from '../../../types/charts'
+import { PerformanceRadarChartProps } from '../../../types/charts'
 import useWindowSize from '../../../helpers/useWindowSize'
 import translateKinds from './helpers/translateKinds'
 
 const PerformanceRadarChart = ({
 	data,
 	kind: kindArray,
-}: PerformanceRadarChartType) => {
+}: PerformanceRadarChartProps) => {
 	const kindArrayFr = translateKinds({ kindArray })
 
 	const [width] = useWindowSize()

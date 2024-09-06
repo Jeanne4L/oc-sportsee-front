@@ -7,17 +7,42 @@ import {
 	Legend,
 } from 'recharts'
 
-import { SessionsDurationType } from '../../../types/charts'
+import { SessionsDurationProps } from '../../../types/charts'
 import CustomLegend from './CustomLegend'
 import CustomTooltip from './CustomTooltip'
+import CustomCursor from './CustomCursor'
+import { useState } from 'react'
 
-type SessionsLineChartType = {
-	data: SessionsDurationType[]
+type SessionsLineChartProps = {
+	data: SessionsDurationProps[]
+}
+
+type StateProps = {
+	activeTooltipIndex?: number
 }
 
 const weekDays = ['L', 'M', 'M', 'J', 'V', 'S', 'D']
 
-const SessionsLineChart = ({ data }: SessionsLineChartType) => {
+const SessionsLineChart = ({ data }: SessionsLineChartProps) => {
+	const [perc, setPerc] = useState(100)
+
+	const handleMouseMove = (state: StateProps) => {
+		if (state && state.activeTooltipIndex !== undefined) {
+			const index = state.activeTooltipIndex
+			const percentage = ((data.length - index - 1) * 100) / (data.length - 1)
+
+			setPerc(100 - percentage)
+		} else {
+			setPerc(100)
+		}
+	}
+
+	const handleMouseLeave = () => {
+		setPerc(100)
+	}
+
+	const gradientId = 'lineGradient'
+
 	return (
 		<ResponsiveContainer
 			width='33%'
@@ -33,8 +58,11 @@ const SessionsLineChart = ({ data }: SessionsLineChartType) => {
 					bottom: 16,
 				}}
 				className='h-chart-height xl:!h-chart-desktop-height'
+				onMouseMove={handleMouseMove}
+				onMouseLeave={handleMouseLeave}
 			>
 				<Legend verticalAlign='top' align='left' content={CustomLegend} />
+				<Tooltip content={<CustomTooltip />} cursor={<CustomCursor />} />
 				<XAxis
 					dataKey='day'
 					axisLine={false}
@@ -47,11 +75,18 @@ const SessionsLineChart = ({ data }: SessionsLineChartType) => {
 					stroke='rgba(255,255,255,0.5)'
 					interval={'preserveStartEnd'}
 				/>
-				<Tooltip content={<CustomTooltip />} />
+				<defs>
+					<linearGradient id={gradientId} x1='0%' y1='0' x2='101%' y2='0'>
+						<stop offset='0%' stopColor='rgba(255,255,255,0.5)' />
+						<stop offset={`${perc}%`} stopColor='rgba(255,255,255,0.5)' />
+						<stop offset={`${perc}%`} stopColor='white' />
+						<stop offset={`${100}%`} stopColor='white' />
+					</linearGradient>
+				</defs>
 				<Line
 					type='monotone'
 					dataKey='sessionLength'
-					stroke='rgba(255,255,255,0.5)'
+					stroke={`url(#${gradientId})`}
 					strokeWidth={3}
 					dot={false}
 					activeDot={{

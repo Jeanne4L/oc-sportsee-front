@@ -6,10 +6,7 @@ export const useUserData = (userId: number): QueryResult<UserData> => {
 
 	return {
 		data: data
-			? {
-					...data,
-					score: data.score ?? data.todayScore ?? 0,
-			  }
+			? { ...data, score: data.score ?? data.todayScore ?? 0 }
 			: undefined,
 		...response,
 	}
