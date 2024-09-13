@@ -1,4 +1,4 @@
-const CustomLegend = () => {
+const SessionsLineChartCustomLegend = () => {
 	return (
 		<span
 			className='font-medium text-s'
@@ -10,4 +10,4 @@ const CustomLegend = () => {
 	)
 }
 
-export default CustomLegend
+export default SessionsLineChartCustomLegend

@@ -5,7 +5,7 @@ import {
 	Legend,
 } from 'recharts'
 
-import CustomLegend from './CustomLegend'
+import CustomLegend from './ScoreRadialChartCustomLegend'
 
 type ScoreRadialChartProps = {
 	score: number

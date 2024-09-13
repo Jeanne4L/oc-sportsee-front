@@ -8,9 +8,9 @@ import {
 } from 'recharts'
 
 import { SessionsDurationProps } from '../../../types/charts'
-import CustomLegend from './CustomLegend'
-import CustomTooltip from './CustomTooltip'
-import CustomCursor from './CustomCursor'
+import CustomLegend from './SessionsLineChartCustomLegend'
+import CustomTooltip from './SessionsLineChartCustomTooltip'
+import CustomCursor from './SessionsLineChartCustomCursor'
 import { useState } from 'react'
 
 type SessionsLineChartProps = {
@@ -21,7 +21,7 @@ type StateProps = {
 	activeTooltipIndex?: number
 }
 
-const weekDays = ['L', 'M', 'M', 'J', 'V', 'S', 'D']
+const locales = ['L', 'M', 'M', 'J', 'V', 'S', 'D']
 
 const SessionsLineChart = ({ data }: SessionsLineChartProps) => {
 	const [perc, setPerc] = useState(100)
@@ -68,7 +68,7 @@ const SessionsLineChart = ({ data }: SessionsLineChartProps) => {
 					axisLine={false}
 					tickLine={false}
 					tickFormatter={(tick) =>
-						tick > 7 ? weekDays[tick - 7] : weekDays[tick - 1]
+						tick > 7 ? locales[tick - 7] : locales[tick - 1]
 					}
 					tick={{ fontSize: 12 }}
 					tickMargin={16}

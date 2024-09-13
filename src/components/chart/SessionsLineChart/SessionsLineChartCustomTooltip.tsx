@@ -1,9 +1,8 @@
 import { TooltipProps } from 'recharts'
 
-const CustomTooltip: React.FC<TooltipProps<number, string>> = ({
-	active,
-	payload,
-}) => {
+const SessionsLineChartCustomTooltip: React.FC<
+	TooltipProps<number, string>
+> = ({ active, payload }) => {
 	if (active && payload && payload.length) {
 		return (
 			<div className='text-center px-s py-xs bg-white'>
@@ -15,4 +14,4 @@ const CustomTooltip: React.FC<TooltipProps<number, string>> = ({
 	return null
 }
 
-export default CustomTooltip
+export default SessionsLineChartCustomTooltip
