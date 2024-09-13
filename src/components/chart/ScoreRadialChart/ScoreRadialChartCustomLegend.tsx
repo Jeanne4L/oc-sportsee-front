@@ -1,7 +1,7 @@
 type CustomLegendProps = {
 	score: number
 }
-const CustomLegend = ({ score }: CustomLegendProps) => {
+const ScoreRadialChartCustomLegend = ({ score }: CustomLegendProps) => {
 	return (
 		<p className='text-m font-medium text-grey text-center'>
 			<span className='text-lg font-bold text-black'>{score}%</span>
@@ -13,4 +13,4 @@ const CustomLegend = ({ score }: CustomLegendProps) => {
 	)
 }
 
-export default CustomLegend
+export default ScoreRadialChartCustomLegend

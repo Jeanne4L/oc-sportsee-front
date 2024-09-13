@@ -10,8 +10,8 @@ import {
 } from 'recharts'
 
 import { DailyActivitiesProps } from '../../../types/charts'
-import CustomLegend from './CustomLegend'
-import CustomTooltip from './CustomTooltip'
+import CustomLegend from './DailyBarChartCustomLegend'
+import CustomTooltip from './DailyBarChartCustomTooltip'
 import getDayInDate from './helpers/getDayInDate'
 
 type DailyBarChartProps = {
@@ -73,6 +73,7 @@ const DailyBarChart = ({ data }: DailyBarChartProps) => {
 						tickLine={false}
 					/>
 					<Tooltip
+						cursor={{ fill: '#C4C4C4', opacity: 0.5 }}
 						wrapperStyle={{ background: '#E60000' }}
 						labelStyle={{ display: 'none' }}
 						content={<CustomTooltip />}

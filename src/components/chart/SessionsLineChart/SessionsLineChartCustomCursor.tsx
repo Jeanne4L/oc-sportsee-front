@@ -4,7 +4,7 @@ type CustomCursorProps = {
 	points?: Array<{ x: number; y: number }>
 }
 
-const CustomCursor: React.FC<CustomCursorProps> = (props) => {
+const SessionsLineChartCustomCursor: React.FC<CustomCursorProps> = (props) => {
 	const { points } = props
 
 	if (!points || points.length === 0) return null
@@ -15,4 +15,4 @@ const CustomCursor: React.FC<CustomCursorProps> = (props) => {
 	)
 }
 
-export default CustomCursor
+export default SessionsLineChartCustomCursor
