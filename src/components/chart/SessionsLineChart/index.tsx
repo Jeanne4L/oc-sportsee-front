@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
 	LineChart,
 	Line,
@@ -11,7 +12,6 @@ import { SessionsDurationProps } from '../../../types/charts'
 import CustomLegend from './SessionsLineChartCustomLegend'
 import CustomTooltip from './SessionsLineChartCustomTooltip'
 import CustomCursor from './SessionsLineChartCustomCursor'
-import { useState } from 'react'
 
 type SessionsLineChartProps = {
 	data: SessionsDurationProps[]
