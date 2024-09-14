@@ -1,17 +1,17 @@
 import { FC, useContext } from 'react'
 
 import { AuthContext } from '../../App'
-import { useUserData } from '../../helpers/queries/user/useUserData'
 import Header from '../../components/Header'
 import StatCard from '../../components/StatCard'
 import DailyBarChart from '../../components/chart/DailyBarChart'
 import SessionsLineChart from '../../components/chart/SessionsLineChart'
 import PerformanceRadarChart from '../../components/chart/PerformanceRadarChart'
 import ScoreRadialChart from '../../components/chart/ScoreRadialChart'
+import Sidebar from '../../components/Sidebar'
 import Loading from '../Loading'
 import ErrorPage from '../ErrorPage'
+import { useUserData } from '../../helpers/queries/user/useUserData'
 import { generateStatsArray } from './helpers/generateStatsArray'
-import Sidebar from '../../components/Sidebar'
 import { useDailyActivity } from '../../helpers/queries/chart/useDailyActivity'
 import { useSessionsDuration } from '../../helpers/queries/chart/useSessionsDuration'
 import { usePerformanceStats } from '../../helpers/queries/chart/usePerformanceStats'
@@ -46,6 +46,7 @@ const HomeContent: FC = () => {
 	const error = userError || dailyError || sessionsError || performanceError
 
 	if (loading) return <Loading />
+
 	if (error)
 		return <ErrorPage message={error.message} code={error.response?.status} />
 	if (!userData)
