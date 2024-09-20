@@ -37,6 +37,6 @@ type PerformanceDataProps = {
 }
 
 export type PerformanceRadarChartProps = {
-	kind: { [key: string]: string }
+	kind: { [key: number]: string }
 	data: PerformanceDataProps[]
 }
