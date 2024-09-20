@@ -9,16 +9,16 @@ import {
 import { PerformanceRadarChartProps } from '../../../types/charts'
 import useWindowSize from '../../../helpers/useWindowSize'
 
-const locales = [
-	'Cardio',
-	'Énergie',
-	'Endurance',
-	'Force',
-	'Vitesse',
-	'Intensité',
-]
+const locales = {
+	cardio: 'Cardio',
+	energy: 'Énergie',
+	endurance: 'Endurance',
+	strength: 'Force',
+	speed: 'Vitesse',
+	intensity: 'Intensité',
+}
 
-const PerformanceRadarChart = ({ data }: PerformanceRadarChartProps) => {
+const PerformanceRadarChart = ({ data, kind }: PerformanceRadarChartProps) => {
 	const [width] = useWindowSize()
 	const outerRadius = width >= 1280 ? 80 : 50
 
@@ -36,7 +36,7 @@ const PerformanceRadarChart = ({ data }: PerformanceRadarChartProps) => {
 						fill: '#fff',
 						fontSize: '12px',
 					}}
-					tickFormatter={(tick) => locales[tick - 1]}
+					tickFormatter={(tick) => locales[kind[tick] as keyof typeof locales]}
 				/>
 				<Radar dataKey='value' fill='#FF0101' fillOpacity={0.7} />
 			</RadarChart>
