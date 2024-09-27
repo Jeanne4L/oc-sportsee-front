@@ -1,16 +1,9 @@
-import { useContext } from 'react'
-
 import Logo from '../icon/logo'
-import { AuthContext } from '../../App'
+import { useAuth } from '../../services/auth/useAuthContext'
 
 const Header = () => {
-	const authContext = useContext(AuthContext)
+	const { setUserId } = useAuth()
 
-	if (!authContext) {
-		return null
-	}
-
-	const { setUserId } = authContext
 	const usersId = [12, 18]
 
 	const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

@@ -1,13 +1,14 @@
 import { SessionsDurationProps } from '../../../types/charts'
+import { useAuth } from '../../auth/useAuthContext'
 import { QueryResult, useQuery } from '../useQuery'
 
 type SessionsLineChartProps = {
 	sessions: SessionsDurationProps[]
 }
 
-export const useSessionsDuration = (
-	userId: number
-): QueryResult<SessionsLineChartProps> => {
+export const useSessionsDuration = (): QueryResult<SessionsLineChartProps> => {
+	const { userId } = useAuth()
+
 	const { data, ...response } = useQuery<SessionsLineChartProps>(
 		`/user/${userId}/average-sessions`
 	)

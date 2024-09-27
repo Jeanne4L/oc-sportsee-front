@@ -1,6 +1,5 @@
-import { FC, useContext } from 'react'
+import { FC } from 'react'
 
-import { AuthContext } from '../../App'
 import Header from '../../components/Header'
 import StatCard from '../../components/StatCard'
 import DailyBarChart from '../../components/chart/DailyBarChart'
@@ -10,36 +9,33 @@ import ScoreRadialChart from '../../components/chart/ScoreRadialChart'
 import Sidebar from '../../components/Sidebar'
 import Loading from '../Loading'
 import ErrorPage from '../ErrorPage'
-import { useUserData } from '../../helpers/queries/user/useUserData'
 import { generateStatsArray } from './helpers/generateStatsArray'
-import { useDailyActivity } from '../../helpers/queries/chart/useDailyActivity'
-import { useSessionsDuration } from '../../helpers/queries/chart/useSessionsDuration'
-import { usePerformanceStats } from '../../helpers/queries/chart/usePerformanceStats'
+import { useUserData } from '../../services/queries/user/useUserData'
+import { useDailyActivity } from '../../services/queries/chart/useDailyActivity'
+import { usePerformanceStats } from '../../services/queries/chart/usePerformanceStats'
+import { useSessionsDuration } from '../../services/queries/chart/useSessionsDuration'
 
 const HomeContent: FC = () => {
-	const authContext = useContext(AuthContext)
-	const userId = authContext?.userId
-
 	const {
 		data: userData,
 		loading: userLoading,
 		error: userError,
-	} = useUserData(userId ?? 0)
+	} = useUserData()
 	const {
 		data: dailyData,
 		loading: dailyLoading,
 		error: dailyError,
-	} = useDailyActivity(userId ?? 0)
+	} = useDailyActivity()
 	const {
 		data: sessionsData,
 		loading: sessionsLoading,
 		error: sessionsError,
-	} = useSessionsDuration(userId ?? 0)
+	} = useSessionsDuration()
 	const {
 		data: performanceData,
 		loading: performanceLoading,
 		error: performanceError,
-	} = usePerformanceStats(userId ?? 0)
+	} = usePerformanceStats()
 
 	const loading =
 		userLoading || dailyLoading || sessionsLoading || performanceLoading
@@ -89,7 +85,7 @@ const HomeContent: FC = () => {
 						<div className='flex flex-col justify-between gap-6'>
 							{statsArray.map((stat) => (
 								<StatCard
-									key={`${stat.value}-${stat.unit}-${stat.label}`}
+									key={stat.label}
 									Icon={stat.icon}
 									data={`${stat.value}${stat.unit}`}
 									label={stat.label}

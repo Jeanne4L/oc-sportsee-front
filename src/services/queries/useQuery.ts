@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios'
 import { useState, useEffect } from 'react'
 
-import generateError from '../generateError'
+import generateError from '../../helpers/generateError'
 
 const BASE_URL = 'http://localhost:3000'
 

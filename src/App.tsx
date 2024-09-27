@@ -1,24 +1,12 @@
-import { useState, createContext } from 'react'
-
 import './App.css'
 import Home from './pages/Home'
-
-type AuthContextProps = {
-	userId: number
-	setUserId: React.Dispatch<React.SetStateAction<number>>
-}
-
-export const AuthContext = createContext<AuthContextProps | undefined>(
-	undefined
-)
+import { AuthContextProvider } from './services/auth/useAuthContext'
 
 const App = () => {
-	const [userId, setUserId] = useState<number>(12)
-
 	return (
-		<AuthContext.Provider value={{ userId, setUserId }}>
+		<AuthContextProvider>
 			<Home />
-		</AuthContext.Provider>
+		</AuthContextProvider>
 	)
 }
 
