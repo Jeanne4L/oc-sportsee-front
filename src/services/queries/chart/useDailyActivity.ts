@@ -2,20 +2,36 @@ import { DailyActivitiesProps } from '../../../types/charts'
 import { useAuth } from '../../auth/useAuthContext'
 import { QueryResult, useQuery } from '../useQuery'
 
-type DailyBarChartProps = {
-	sessions: DailyActivitiesProps[]
+export type ApiDailyBarChartProps = {
+  activity: {
+    sessions: DailyActivitiesProps[]
+  }
 }
 
-export const useDailyActivity = (): QueryResult<DailyBarChartProps> => {
-	const { userId } = useAuth()
+export type MockDailyBarChartProps = {
+  sessions: DailyActivitiesProps[]
+}
 
-	const { data, error, loading } = useQuery<DailyBarChartProps>(
-		`/user/${userId}/activity`
-	)
+export const useDailyActivity = (): QueryResult<MockDailyBarChartProps> => {
+  const { userId } = useAuth()
 
-	return {
-		data,
-		error,
-		loading,
-	}
+  const { data, error, loading } = useQuery<
+    MockDailyBarChartProps | ApiDailyBarChartProps
+  >(`/user/${userId}/activity`)
+
+  let sessions: DailyActivitiesProps[] | undefined
+
+  if (data) {
+    if ('activity' in data) {
+      sessions = data.activity.sessions
+    } else {
+      sessions = data.sessions
+    }
+  }
+
+  return {
+    data: sessions ? { sessions } : undefined,
+    error,
+    loading,
+  }
 }

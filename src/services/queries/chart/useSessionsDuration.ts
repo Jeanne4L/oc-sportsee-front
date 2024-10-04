@@ -3,18 +3,28 @@ import { useAuth } from '../../auth/useAuthContext'
 import { QueryResult, useQuery } from '../useQuery'
 
 type SessionsLineChartProps = {
-	sessions: SessionsDurationProps[]
+  sessions: SessionsDurationProps[]
+}
+
+type MockedSessionsLineChartProps = {
+  averageSessions: SessionsDurationProps[]
 }
 
 export const useSessionsDuration = (): QueryResult<SessionsLineChartProps> => {
-	const { userId } = useAuth()
+  const { userId } = useAuth()
 
-	const { data, ...response } = useQuery<SessionsLineChartProps>(
-		`/user/${userId}/average-sessions`
-	)
+  const { data, ...response } = useQuery<
+    SessionsLineChartProps | MockedSessionsLineChartProps
+  >(`/user/${userId}/average-sessions`)
 
-	return {
-		data: data ? { ...data } : undefined,
-		...response,
-	}
+  const sessions = data
+    ? 'sessions' in data
+      ? data.sessions
+      : data.averageSessions
+    : undefined
+
+  return {
+    data: sessions ? { sessions } : undefined,
+    ...response,
+  }
 }
