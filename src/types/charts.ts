@@ -1,42 +1,64 @@
 export type StatData = {
-	unit: string
-	label: string
-	icon: JSX.Element
-	color: string
+  unit: string
+  label: string
+  icon: JSX.Element
+  color: string
 }
 
 export type Stats = {
-	calorieCount: StatData
-	proteinCount: StatData
-	carbohydrateCount: StatData
-	lipidCount: StatData
+  calorieCount: StatData
+  proteinCount: StatData
+  carbohydrateCount: StatData
+  lipidCount: StatData
 }
 
 export type StatsArrayItem = {
-	value: number
-	unit: string
-	label: string
-	icon: JSX.Element
-	color: string
+  value: number
+  unit: string
+  label: string
+  icon: JSX.Element
+  color: string
 }
 
 export type DailyActivitiesProps = {
-	day: Date
-	kilogram: number
-	calories: number
+  day: Date
+  kilogram: number
+  calories: number
+}
+
+export type ApiDailyBarChartProps = {
+  activity: {
+    sessions: DailyActivitiesProps[]
+  }
+}
+
+export type MockDailyBarChartProps = {
+  sessions: DailyActivitiesProps[]
 }
 
 export type SessionsDurationProps = {
-	day: number
-	sessionLength: number
+  day: number
+  sessionLength: number
+}
+
+export type ApiSessionsLineChartProps = {
+  sessions: SessionsDurationProps[]
+}
+
+export type MockSessionsLineChartProps = {
+  averageSessions: SessionsDurationProps[]
 }
 
 type PerformanceDataProps = {
-	value: number
-	kind: number
+  value: number
+  kind: number
 }
 
-export type PerformanceRadarChartProps = {
-	kind: { [key: number]: string }
-	data: PerformanceDataProps[]
+export type ApiPerformanceRadarChartProps = {
+  kind: { [key: number]: string }
+  data: PerformanceDataProps[]
+}
+
+export type MockPerformanceRadarChartProps = {
+  performance: ApiPerformanceRadarChartProps
 }

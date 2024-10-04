@@ -1,17 +1,21 @@
-import { PerformanceRadarChartProps } from '../../../types/charts'
+import {
+  ApiPerformanceRadarChartProps,
+  MockPerformanceRadarChartProps,
+} from '../../../types/charts'
 import { useAuth } from '../../auth/useAuthContext'
+import { PerformanceDataFormatter } from '../../formatters/performanceDataFormatter'
 import { QueryResult, useQuery } from '../useQuery'
 
 export const usePerformanceStats =
-	(): QueryResult<PerformanceRadarChartProps> => {
-		const { userId } = useAuth()
+  (): QueryResult<ApiPerformanceRadarChartProps> => {
+    const { userId } = useAuth()
 
-		const { data, ...response } = useQuery<PerformanceRadarChartProps>(
-			`/user/${userId}/performance`
-		)
+    const { data, ...response } = useQuery<
+      ApiPerformanceRadarChartProps | MockPerformanceRadarChartProps
+    >(`/user/${userId}/performance`)
 
-		return {
-			data: data ? { ...data } : undefined,
-			...response,
-		}
-	}
+    return {
+      data: data ? PerformanceDataFormatter.format(data) : undefined,
+      ...response,
+    }
+  }

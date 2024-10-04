@@ -1,21 +1,21 @@
-import { DailyActivitiesProps } from '../../../types/charts'
+import {
+  ApiDailyBarChartProps,
+  MockDailyBarChartProps,
+} from '../../../types/charts'
 import { useAuth } from '../../auth/useAuthContext'
+import { DailyDataFormatter } from '../../formatters/dailyDataFormatter'
 import { QueryResult, useQuery } from '../useQuery'
 
-type DailyBarChartProps = {
-	sessions: DailyActivitiesProps[]
-}
+export const useDailyActivity = (): QueryResult<MockDailyBarChartProps> => {
+  const { userId } = useAuth()
 
-export const useDailyActivity = (): QueryResult<DailyBarChartProps> => {
-	const { userId } = useAuth()
+  const { data, error, loading } = useQuery<
+    MockDailyBarChartProps | ApiDailyBarChartProps
+  >(`/user/${userId}/activity`)
 
-	const { data, error, loading } = useQuery<DailyBarChartProps>(
-		`/user/${userId}/activity`
-	)
-
-	return {
-		data,
-		error,
-		loading,
-	}
+  return {
+    data: data ? DailyDataFormatter.format(data) : undefined,
+    error,
+    loading,
+  }
 }

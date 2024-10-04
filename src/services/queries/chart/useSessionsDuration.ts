@@ -1,20 +1,21 @@
-import { SessionsDurationProps } from '../../../types/charts'
+import {
+  MockSessionsLineChartProps,
+  ApiSessionsLineChartProps,
+} from '../../../types/charts'
 import { useAuth } from '../../auth/useAuthContext'
+import { SessionsDataFormatter } from '../../formatters/sessionsDataFormatter'
 import { QueryResult, useQuery } from '../useQuery'
 
-type SessionsLineChartProps = {
-	sessions: SessionsDurationProps[]
-}
+export const useSessionsDuration =
+  (): QueryResult<ApiSessionsLineChartProps> => {
+    const { userId } = useAuth()
 
-export const useSessionsDuration = (): QueryResult<SessionsLineChartProps> => {
-	const { userId } = useAuth()
+    const { data, ...response } = useQuery<
+      ApiSessionsLineChartProps | MockSessionsLineChartProps
+    >(`/user/${userId}/average-sessions`)
 
-	const { data, ...response } = useQuery<SessionsLineChartProps>(
-		`/user/${userId}/average-sessions`
-	)
-
-	return {
-		data: data ? { ...data } : undefined,
-		...response,
-	}
-}
+    return {
+      data: data ? SessionsDataFormatter.format(data) : undefined,
+      ...response,
+    }
+  }
